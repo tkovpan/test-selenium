@@ -17,14 +17,13 @@ public class GoogleTest {
     @Before
     public void start() {
         ChromeDriverManager.getInstance().setup();
-        //System.setProperty("webdriver.chrome.driver","D:\\tools\\Drivers\\chromedriver.exe");
         driver = new ChromeDriver();
-        //FirefoxDriverManager.getInstance().setup();
-        //System.setProperty("webdriver.chrome.driver","D:\\tools\\Drivers\\chromedriver.exe");
-        //driver = new FirefoxDriver();
-        //InternetExplorerDriverManager.getInstance().setup();
-        //System.setProperty("webdriver.chrome.driver","D:\\tools\\Drivers\\chromedriver.exe");
-        //driver = new InternetExplorerDriver();
+        FirefoxDriverManager.getInstance().setup();
+        System.setProperty("webdriver.chrome.driver","D:\\tools\\Drivers\\chromedriver.exe");
+        driver = new FirefoxDriver();
+        InternetExplorerDriverManager.getInstance().setup();
+        System.setProperty("webdriver.chrome.driver","D:\\tools\\Drivers\\chromedriver.exe");
+        driver = new InternetExplorerDriver();
     }
     @Test
     public void google_test()
@@ -35,6 +34,7 @@ public class GoogleTest {
     }
     @After
     public void stop() {
-     driver.quit();
+
+        driver.quit();
     }
 }
