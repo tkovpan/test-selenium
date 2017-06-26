@@ -51,15 +51,15 @@ public class Task7 {
                 Select select = new Select(driver.findElement(By.xpath("//*[@id=\"box-product\"]/div[1]/div[3]/div/div[4]/form/div[1]/select")));
                 select.selectByValue("Small");
                 }
-            Thread.sleep(500);
-            driver.findElement(By.name("add_cart_product")).click();
             Thread.sleep(100);
+            driver.findElement(By.name("add_cart_product")).click();
+            Thread.sleep(50);
             driver.findElement(By.xpath("/html/body/div[2]/div/button")).click();
 
-            Thread.sleep(100);
+            Thread.sleep(50);
 
-            wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath("//*[@id=\"cart\"]/a/div/div[2]/span[1]"), String.valueOf(i + 1)));
-            Thread.sleep(100);
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"cart\"]/a/div/div[2]/span[1]"), String.valueOf(i + 1)));
+            Thread.sleep(50);
         }
 
         driver.findElement(By.xpath("//*[@id=\"cart\"]/a/div")).click();
@@ -70,7 +70,7 @@ public class Task7 {
 
             WebElement table = driver.findElement(By.xpath("//*[@id=\"box-checkout-cart\"]/div/table/tbody/tr[1]"));
             wait.until(ExpectedConditions.stalenessOf(table));
-            Thread.sleep(500);
+            Thread.sleep(50);
 
             if (!isElementPresent(By.xpath("//*[@id=\"box-checkout-cart\"]/h2"))) {
                 driver.findElement(By.cssSelector("a[href*='http://localhost/litecart/en/']")).click();
