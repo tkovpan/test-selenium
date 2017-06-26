@@ -47,13 +47,13 @@ public class Task7 {
 
             driver.findElement(By.xpath("//*[@id=\"box-popular-products\"]/div/div"));
             AllDucks.get(i).click();
-            if (driver.findElement(By.xpath("//*[@id=\"box-popular-products\"]")).getText().equals("Yellow Duck")) {
+            if (isElementPresent(By.xpath("//*[@id=\"box-product\"]/div[1]/div[3]/div/div[4]/form/div[1]/select"))){
                 Select select = new Select(driver.findElement(By.xpath("//*[@id=\"box-product\"]/div[1]/div[3]/div/div[4]/form/div[1]/select")));
                 select.selectByValue("Small");
                 }
-            Thread.sleep(100);
+            Thread.sleep(5);
             driver.findElement(By.name("add_cart_product")).click();
-            Thread.sleep(50);
+            Thread.sleep(5);
             driver.findElement(By.xpath("/html/body/div[2]/div/button")).click();
 
             Thread.sleep(50);
@@ -66,7 +66,7 @@ public class Task7 {
 
         for (; ; ) {
             wait.until(ExpectedConditions.elementToBeClickable(By.name("remove_cart_item"))).click();
-
+            Thread.sleep(50);
 
             WebElement table = driver.findElement(By.xpath("//*[@id=\"box-checkout-cart\"]/div/table/tbody/tr[1]"));
             wait.until(ExpectedConditions.stalenessOf(table));
