@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,8 +28,8 @@ public class Task7 {
         //driver = new FirefoxDriver();
         //InternetExplorerDriverManager.getInstance().setup();
         //driver = new InternetExplorerDriver();
-        wait = new WebDriverWait(driver, 10);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, 2);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     }
 
     private boolean isElementPresent(By locator) {
@@ -51,26 +52,26 @@ public class Task7 {
                 Select select = new Select(driver.findElement(By.xpath("//*[@id=\"box-product\"]/div[1]/div[3]/div/div[4]/form/div[1]/select")));
                 select.selectByValue("Small");
             }
-            Thread.sleep(5);
+
             driver.findElement(By.name("add_cart_product")).click();
-            Thread.sleep(5);
+
             driver.findElement(By.xpath("/html/body/div[2]/div/button")).click();
 
-            Thread.sleep(5);
+
 
             wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"cart\"]/a/div/div[2]/span[1]"), String.valueOf(i + 1)));
-            Thread.sleep(5);
+
         }
 
         driver.findElement(By.xpath("//*[@id=\"cart\"]/a/div")).click();
 
         for (; ; ) {
             wait.until(ExpectedConditions.elementToBeClickable(By.name("remove_cart_item"))).click();
-            Thread.sleep(5);
+
 
             WebElement table = driver.findElement(By.xpath("//*[@id=\"box-checkout-cart\"]/div/table/tbody/tr[1]"));
             wait.until(ExpectedConditions.stalenessOf(table));
-            Thread.sleep(5);
+
 
 
             if (!isElementPresent(By.xpath("//*[@id=\"box-checkout-cart\"]/h2"))) {
@@ -82,5 +83,10 @@ public class Task7 {
                 String items = driver.findElement(By.className("quantity")).getCssValue("item(s)-");
                 Assert.assertEquals("", items);
             }
-        }
+
+    @After
+    public void stop() {
+        driver.quit();
+    }
+}
 
