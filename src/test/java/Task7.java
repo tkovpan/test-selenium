@@ -48,7 +48,7 @@ public class Task7 {
 
             driver.findElement(By.xpath("//*[@id=\"box-popular-products\"]/div/div"));
             AllDucks.get(i).click();
-            if (isElementPresent(By.xpath("//*[@id=\"box-product\"]/div[1]/div[3]/div/div[4]/form/div[1]/select"))) {
+            if (isElementPresent(By.name("options[Size]"))) {
                 Select select = new Select(driver.findElement(By.name("options[Size]")));
                 select.selectByValue("Small");
             }
