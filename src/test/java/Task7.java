@@ -75,7 +75,7 @@ public class Task7 {
 
 
             if (!isElementPresent(By.xpath("//*[@id=\"box-checkout-cart\"]/h2"))) {
-                driver.findElement(By.cssSelector("a[href*='http://localhost/litecart/en/']")).click();
+                driver.findElement(By.xpath("//a[contains (text(), '<< Back')]")).click();
                 break;
             }
         }
