@@ -1,5 +1,7 @@
+
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -23,12 +25,12 @@ public class Task4 {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
-    private boolean IsElementPresent(By locator) {
+       private boolean isElementPresent(By locator) {
         return driver.findElements(locator).size() > 0;
     }
 
     @Test
-    public void all_sections() {
+    public void all_sections() throws InterruptedException {
         driver.get("http://localhost/litecart/admin/");
         //driver.navigate().to("http://localhost/litecart/admin/");
         driver.findElement(By.name("username")).sendKeys("admin");
@@ -41,34 +43,21 @@ public class Task4 {
         for (int i = 0; i < AllElements.size(); i++) {
             AllElements = driver.findElements(By.xpath("//*[@id=\"box-apps-menu\"]/li"));
             AllElements.get(i).click();
-            if (IsElementPresent(By.xpath("//*[@id=\"main\"]/h1"))) {
-                System.out.println("Element is Present");
-
-            } else {
-                System.out.println("Element is Absent");
+            Assert.assertTrue("Element h1 not found",isElementPresent(By.cssSelector("h1")));
             }
+
 
             List<WebElement> AllSubElements = driver.findElements(By.xpath("//*[@class=\"docs\"]/li"));
 
             for (int j = 0; j < AllSubElements.size(); j++) {
                 AllSubElements = driver.findElements(By.xpath("//*[@class=\"docs\"]/li"));
                 AllSubElements.get(j).click();
-                if (IsElementPresent(By.xpath("//*[@id=\"main\"]/h1"))) {
-                    System.out.println("Element is Present");
-
-                } else {
-                    System.out.println("Element is Absent");
+                Assert.assertTrue("Element h1 not found",isElementPresent(By.cssSelector("h1")));
                 }
-
             }
-
-            }
-        }
 
     @After
     public void stop() {
         driver.quit();
     }
 }
-
-
