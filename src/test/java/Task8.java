@@ -44,4 +44,9 @@ public class Task8 {
            driver.switchTo().window(parentLink);
         }
     }
+
+    @After
+    public void stop() {
+        driver.quit();
+    }
 }
