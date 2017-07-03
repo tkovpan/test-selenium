@@ -1,38 +1,39 @@
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+
 public class Task6 {
     public WebDriver driver;
-
+    public WebDriverWait wait;
 
     @Before
     public void start() {
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, 10);
     }
 
     @Test
-    public void login_admin() {
+    public void login_admin() throws InterruptedException {
         driver.get("http://localhost/litecart/admin/");
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.xpath("//*[@id=\"box-login\"]/form/div[2]/button")).click();
 
         //General
-        driver.findElement(By.cssSelector("a[href*='http://localhost/litecart/admin/?app=catalog&doc=catalog']")).click();
+        driver.findElement(By.xpath("//span[contains(text(), 'Catalog')]")).click();
         driver.findElement(By.xpath("//*[@id=\"main\"]/ul/li[3]/a")).click();
         driver.findElement(By.xpath("//*[@id=\"tab-general\"]/div/div[1]/div[4]/div/div/div[1]/label/input")).click();
         driver.findElement(By.xpath("//*[@id=\"tab-general\"]/div/div[1]/div[5]/input")).sendKeys("06/21/2017");
@@ -71,8 +72,14 @@ public class Task6 {
         driver.findElement(By.xpath("//*[@id=\"main\"]/form/p/button[1]")).click();
 
         // Verification
-        driver.findElement(By.cssSelector("a[href*='http://localhost/litecart/admin/?app=catalog&doc=catalog']")).click();
-        driver.findElement(By.xpath("//a[contains(text(), 'Test Task6')]")).click();
+       driver.findElement(By.xpath("//a[contains (text(), 'Rubber Ducks')]")).click();
+
+
+wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"main\"]/form/table/tbody"), "Test Task6"));
+
+        String newProduct = driver.findElement(By.xpath("//*[@id=\"main\"]/form/table/tbody")).getText();
+       Assert.assertEquals("Test Task6", newProduct);
+
     }
 
     @After
