@@ -14,7 +14,7 @@ public class TestProducts extends TestBase {
             app.addProducts(products);
         }
     }
-    public void addAndRemoveProducts(RemoveProductsPage products) {
+    public void ProductsRemove(RemoveProductsPage products) {
         for(; ;){
             app.removeProducts(products);
         }
