@@ -6,11 +6,11 @@ import Task10.Pages.RemoveProductsPage;
 
 public class Test extends TestBase {
 
-   @org.junit.Test
+    @Test
 
     public void addAndRemoveProducts(AddProductPage products) {
 
-       for (; ; ) {
+       for (int i=0; i<3; i++) {
            app.addProducts(products);
        }
    }
