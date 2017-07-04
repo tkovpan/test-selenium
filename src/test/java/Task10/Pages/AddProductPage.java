@@ -24,14 +24,9 @@ public class AddProductPage extends Page {
     }
 
     private boolean isElementPresent(By name) {
+
         return true;
     }
-
-    @FindBy(xpath = "//*[@id=\\\"content\\\"]/ul/li[2]/a")
-    public WebElement popularProducts;
-
-    @FindBy(xpath = "//*[@id=\\\"box-popular-products\\\"]/div/div")
-    public WebElement OpenDuck;
 
     @FindBy(name = "add_cart_product")
     public WebElement AddCartProduct;
