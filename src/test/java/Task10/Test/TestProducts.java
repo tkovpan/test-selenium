@@ -7,14 +7,12 @@ public class TestProducts extends TestBase {
 
     @Test
     public void addAndRemoveProducts() throws InterruptedException {
-        //int expectCount = 0;
         app.OpenPopularPage();
         for (int i = 0; i < 3; i++) {
             int currentCartValue = app.AddProducts(i);
             Assert.assertEquals(i + 1, currentCartValue);
         }
         app.OpenCart();
-
         app.RemoveAllProducts();
         Assert.assertEquals(0, app.getPageCount());
     }

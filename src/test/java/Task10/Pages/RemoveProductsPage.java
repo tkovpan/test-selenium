@@ -18,7 +18,6 @@ public class RemoveProductsPage extends Page {
         driver.get(baseUrl);
     }
 
-
     private boolean isElementPresent(By locator) {
 
         return driver.findElements(locator).size() > 0;

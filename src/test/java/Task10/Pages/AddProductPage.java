@@ -18,16 +18,13 @@ public class AddProductPage extends Page {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
     public void open(String baseUrl) {
         driver.get(baseUrl);
     }
-
     private boolean isElementPresent(By locator) {
 
         return driver.findElements(locator).size() > 0;
     }
-
     public void addToCart(){
             if (isElementPresent(By.name("options[Size]"))) {
             Select select = new Select(driver.findElement(By.name("options[Size]")));
@@ -36,7 +33,6 @@ public class AddProductPage extends Page {
 
         driver.findElement(By.name("add_cart_product")).click();
     }
-
     public void closeProductPage(){
         driver.findElement(By.xpath("/html/body/div[2]/div/button")).click();
     }

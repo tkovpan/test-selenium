@@ -34,14 +34,8 @@ public class MainPage extends Page {
         String currentCartValue =  driver.findElement(By.className("quantity")).getText();
         return Integer.parseInt(currentCartValue);
     }
-    //int i = 0;
-
-    public void openCart(){
-        driver.findElement(By.xpath("//*[@id=\"cart\"]/a/div")).click();
+       public void openCart(){
+       driver.findElement(By.xpath("//*[@id=\"cart\"]/a/div")).click();
     }
-
-  public void CartVerification() {
-      driver.findElement(By.className("quantity")).getText();
   }
-}
 

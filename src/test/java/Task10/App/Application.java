@@ -36,9 +36,8 @@ public class Application {
         removeProducts = new RemoveProductsPage(driver);
         mainPage = new MainPage(driver);
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        //wait = new WebDriverWait(driver, 2);
+        //wait = new WebDriverWait(driver, 10);
     }
-
 
     public void quit() {
         driver.quit();
