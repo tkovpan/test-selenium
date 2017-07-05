@@ -13,12 +13,14 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
 public class Application {
 
     private WebDriver driver;
+    public WebDriverWait wait;
 
     private AddProductPage addProducts;
     private RemoveProductsPage removeProducts;
@@ -34,34 +36,36 @@ public class Application {
         removeProducts = new RemoveProductsPage(driver);
         mainPage = new MainPage(driver);
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        //wait = new WebDriverWait(driver, 2);
     }
 
 
     public void quit() {
-
         driver.quit();
     }
 
-    public void addProducts(AddProductPage productsInCart) {
-
+    public void OpenPopularPage() {
         addProducts.open(baseUrl);
-
-        mainPage.popularProducts.click();
-        mainPage.OpenDuck.click();
-
-        addProducts.AddCartProduct.click();
-        addProducts.selectYellowDuck();
-        addProducts.CloseProductPage.click();
-
-        mainPage.quantityItemBefore();
+        mainPage.popularProducts();
     }
 
-    public void removeProducts(RemoveProductsPage productsOutOfCart) {
-        removeProducts.OpenCart.click();
-        removeProducts.RemoveProducts.click();
-        removeProducts.table();
-        removeProducts.BackToMainPage.click();
+    public int AddProducts(int i) throws InterruptedException {
+        mainPage.openDuck(i);
 
-        mainPage.quantityItemAfter();
+        addProducts.addToCart();
+        addProducts.closeProductPage();
+        return mainPage.GetCartValue();
+
+    }
+    public void OpenCart() {
+        mainPage.openCart();
+           }
+
+    public void RemoveAllProducts() {
+              removeProducts.removeAllProducts();
+        }
+
+    public int getPageCount() throws InterruptedException {
+        return mainPage.GetCartValue();
     }
 }

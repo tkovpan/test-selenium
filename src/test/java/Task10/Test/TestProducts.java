@@ -1,22 +1,21 @@
 package Task10.Test;
+import org.junit.Assert;
 import org.junit.Test;
-
-import Task10.Pages.AddProductPage;
-import Task10.Pages.RemoveProductsPage;
+import org.openqa.selenium.By;
 
 public class TestProducts extends TestBase {
 
     @Test
-
-    public void addAndRemoveProducts(AddProductPage products) {
-
-        for (int i=0; i<3; i++) {
-            app.addProducts(products);
+    public void addAndRemoveProducts() throws InterruptedException {
+        //int expectCount = 0;
+        app.OpenPopularPage();
+        for (int i = 0; i < 3; i++) {
+            int currentCartValue = app.AddProducts(i);
+            Assert.assertEquals(i + 1, currentCartValue);
         }
-    }
-    public void ProductsRemove(RemoveProductsPage products) {
-        for(; ;){
-            app.removeProducts(products);
-        }
+        app.OpenCart();
+
+        app.RemoveAllProducts();
+        Assert.assertEquals(0, app.getPageCount());
     }
 }

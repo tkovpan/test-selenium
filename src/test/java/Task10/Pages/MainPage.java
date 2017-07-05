@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
+
 public class MainPage extends Page {
 
     public MainPage(WebDriver driver) {
@@ -16,28 +18,30 @@ public class MainPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
-    public void open(String baseUrl) {
+    public void popularProducts(){
+         driver.findElement(By.xpath("//*[@id=\"content\"]/ul/li[2]/a")).click();
+ }
 
-        driver.get(baseUrl);
+    public void openDuck(int i){
+         //driver.findElement(By.xpath("//*[@id=\"box-popular-products\"]/div/div["+i+"]")).click();
+         List<WebElement> AllDucks = driver.findElements(By.xpath("//*[@id=\"box-popular-products\"]/div/div"));
+         AllDucks.get(i).click();
+    }
+    public int GetCartValue() throws InterruptedException {
+        Thread.sleep(1000);
+        //wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"cart\"]/a/div/div[2]/span[1]"), String.valueOf(i)));
+
+        String currentCartValue =  driver.findElement(By.className("quantity")).getText();
+        return Integer.parseInt(currentCartValue);
+    }
+    //int i = 0;
+
+    public void openCart(){
+        driver.findElement(By.xpath("//*[@id=\"cart\"]/a/div")).click();
     }
 
-    @FindBy(xpath = "//*[@id=\\\"content\\\"]/ul/li[2]/a")
-    public WebElement popularProducts;
-
-    @FindBy(xpath = "//*[@id=\\\"box-popular-products\\\"]/div/div")
-    public WebElement OpenDuck;
-
-    @FindBy(className = "quantity")
-    public WebElement items;
-
-    int i = 0;
-    public void quantityItemBefore() {
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"cart\"]/a/div/div[2]/span[1]"), String.valueOf(i + 1)));
-    }
-    public void quantityItemAfter() {
-        driver.findElement(By.className("quantity")).getText();
-        Assert.assertEquals("0", items);
-
-    }
-    }
+  public void CartVerification() {
+      driver.findElement(By.className("quantity")).getText();
+  }
+}
 

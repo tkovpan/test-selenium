@@ -17,20 +17,24 @@ public class RemoveProductsPage extends Page {
 
         driver.get(baseUrl);
     }
-    @FindBy(xpath = "//*[@id=\\\"cart\\\"]/a/div")
-    public WebElement OpenCart;
 
-    @FindBy(name = "remove_cart_item")
-    public WebElement RemoveProducts;
 
-   @FindBy(xpath = "//*[@id=\"box-checkout-cart\"]/div/table/tbody/tr[1]")
-    public WebElement tableIsNotPresent;
+    private boolean isElementPresent(By locator) {
 
-    @FindBy(xpath = "//a[contains (text(), '<< Back')]")
-    public WebElement BackToMainPage;
+        return driver.findElements(locator).size() > 0;
+    }
 
-    public void table() {
-        WebElement table1 = driver.findElement(By.xpath("//*[@id=\"box-checkout-cart\"]/div/table/tbody/tr[1]"));
-        wait.until(ExpectedConditions.stalenessOf(table1));
+    public void removeAllProducts() {
+        for (; ; ) {
+            wait.until(ExpectedConditions.elementToBeClickable(By.name("remove_cart_item"))).click();
+
+            WebElement table = driver.findElement(By.xpath("//*[@id=\"box-checkout-cart\"]/div/table/tbody/tr[1]"));
+            wait.until(ExpectedConditions.stalenessOf(table));
+
+            if (!isElementPresent(By.xpath("//*[@id=\"box-checkout-cart\"]/h2"))) {
+                driver.findElement(By.xpath("//a[contains (text(), '<< Back')]")).click();
+                break;
+            }
+        }
     }
 }
