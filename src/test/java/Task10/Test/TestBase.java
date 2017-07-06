@@ -14,8 +14,6 @@ public class TestBase {
             app = tlApp.get();
             return;
         }
-
-
         app = new Application();
         tlApp.set(app);
 

@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddProductPage extends Page {
 
-
     public AddProductPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

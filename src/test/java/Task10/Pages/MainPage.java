@@ -21,7 +21,6 @@ public class MainPage extends Page {
     public void popularProducts(){
          driver.findElement(By.xpath("//*[@id=\"content\"]/ul/li[2]/a")).click();
  }
-
     public void openDuck(int i){
          //driver.findElement(By.xpath("//*[@id=\"box-popular-products\"]/div/div["+i+"]")).click();
          List<WebElement> AllDucks = driver.findElements(By.xpath("//*[@id=\"box-popular-products\"]/div/div"));
