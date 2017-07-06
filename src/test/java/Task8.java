@@ -28,8 +28,6 @@ public class Task8 {
         wait = new WebDriverWait(driver, 4);
     }
 
-
-
     @Test
     public void login_admin() {
         driver.get("http://localhost/litecart/admin/");
