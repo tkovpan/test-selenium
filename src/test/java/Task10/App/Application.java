@@ -66,7 +66,7 @@ public class Application {
         removeProducts.removeAllProducts();
         }
 
-    public int GetCarrentValue() {
+    public int GetCurrentValue() {
         return mainPage.GetCartValue();
     }
 }

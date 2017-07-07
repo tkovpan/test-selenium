@@ -9,13 +9,13 @@ public class TestProducts extends TestBase {
     public void addAndRemoveProducts() throws InterruptedException {
         app.OpenPopularPage();
         for (int i = 0; i < 3; i++) {
-            int Count = app.GetCarrentValue();
+            int Count = app.GetCurrentValue();
             app.AddProducts();
            Thread.sleep(1000);
-           Assert.assertEquals(Count + 1, app.GetCarrentValue());
+           Assert.assertEquals(Count + 1, app.GetCurrentValue());
         }
         app.OpenCart();
         app.RemoveAllProducts();
-        Assert.assertEquals(0, app.GetCarrentValue());
+        Assert.assertEquals(0, app.GetCurrentValue());
     }
     }
