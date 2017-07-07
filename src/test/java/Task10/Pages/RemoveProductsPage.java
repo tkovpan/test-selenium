@@ -24,16 +24,16 @@ public class RemoveProductsPage extends Page {
     }
 
     public void removeAllProducts() {
+
+        isElementPresent(By.xpath("//*[@id=\"header\"]/div"));
+
         for (; ; ) {
-            wait.until(ExpectedConditions.elementToBeClickable(By.name("remove_cart_item"))).click();
 
             WebElement table = driver.findElement(By.xpath("//*[@id=\"box-checkout-cart\"]/div/table/tbody/tr[1]"));
+            wait.until(ExpectedConditions.elementToBeClickable(By.name("remove_cart_item"))).click();
             wait.until(ExpectedConditions.stalenessOf(table));
-
-            if (!isElementPresent(By.xpath("//*[@id=\"box-checkout-cart\"]/h2"))) {
-                driver.findElement(By.xpath("//a[contains (text(), '<< Back')]")).click();
                 break;
             }
+        driver.findElement(By.xpath("//a[contains (text(), '<< Back')]")).click();
         }
     }
-}

@@ -35,8 +35,8 @@ public class Application {
         addProducts = new AddProductPage(driver);
         removeProducts = new RemoveProductsPage(driver);
         mainPage = new MainPage(driver);
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        //wait = new WebDriverWait(driver, 10);
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, 4);
     }
 
     public void quit() {
@@ -48,8 +48,8 @@ public class Application {
         mainPage.popularProducts();
     }
 
-    public int AddProducts(int i) throws InterruptedException {
-        mainPage.openDuck(i);
+    public int AddProducts() {
+        mainPage.openDuck();
 
         addProducts.addToCart();
         addProducts.closeProductPage();
@@ -57,14 +57,16 @@ public class Application {
 
     }
     public void OpenCart() {
+
         mainPage.openCart();
            }
 
     public void RemoveAllProducts() {
-              removeProducts.removeAllProducts();
+
+        removeProducts.removeAllProducts();
         }
 
-    public int getPageCount() throws InterruptedException {
+    public int GetCarrentValue() {
         return mainPage.GetCartValue();
     }
 }

@@ -33,6 +33,7 @@ public class AddProductPage extends Page {
         driver.findElement(By.name("add_cart_product")).click();
     }
     public void closeProductPage(){
+
         driver.findElement(By.xpath("/html/body/div[2]/div/button")).click();
     }
  }
