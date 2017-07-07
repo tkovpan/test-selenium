@@ -18,4 +18,4 @@ public class TestProducts extends TestBase {
         app.RemoveAllProducts();
         Assert.assertEquals(0, app.GetCarrentValue());
     }
-}
+    }
