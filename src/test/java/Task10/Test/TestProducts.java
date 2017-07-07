@@ -11,7 +11,7 @@ public class TestProducts extends TestBase {
         for (int i = 0; i < 3; i++) {
             int Count = app.GetCarrentValue();
             app.AddProducts();
-           // Thread.sleep(1000);
+           Thread.sleep(1000);
            Assert.assertEquals(Count + 1, app.GetCarrentValue());
         }
         app.OpenCart();
