@@ -25,7 +25,7 @@ public class RemoveProductsPage extends Page {
 
     public void removeAllProducts() {
 
-        isElementPresent(By.xpath("//*[@id=\"header\"]/div"));
+        wait.until(ExpectedConditions.elementToBeClickable (By.name("remove_cart_item")));
 
         for (; ; ) {
 

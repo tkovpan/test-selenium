@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class AddProductPage extends Page {
 
@@ -20,18 +22,30 @@ public class AddProductPage extends Page {
     public void open(String baseUrl) {
         driver.get(baseUrl);
     }
-    private boolean isElementPresent(By locator) {
 
-        return driver.findElements(locator).size() > 0;
+
+     private boolean isElementNotPresent(By locator) {
+        try {
+            driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+            return driver.findElements(locator).size() == 0;
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.MILLISECONDS);
+        }
     }
-    public void addToCart(){
-            if (isElementPresent(By.name("options[Size]"))) {
+    public void addToCart() {
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.name("add_cart_product")));
+
+        if (!isElementNotPresent(By.name("options[Size]"))) {
             Select select = new Select(driver.findElement(By.name("options[Size]")));
             select.selectByValue("Small");
         }
-
+        WebElement qtty = driver.findElement(By.cssSelector(".quantity"));
+        Integer value = Integer.valueOf(qtty.getText());
         driver.findElement(By.name("add_cart_product")).click();
-    }
+        wait.until(ExpectedConditions.textToBePresentInElement(qtty, String.valueOf(value + 1)));
+
+           }
     public void closeProductPage(){
 
         driver.findElement(By.xpath("/html/body/div[2]/div/button")).click();
